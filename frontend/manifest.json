@@ -1,6 +1,6 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
-  "version": "0.0.1",
+  "name": "Media Bugger",
+  "version": "1.0",
   "manifest_version": 2,
   "description": "This extension was created with the awesome extensionizr.io",
   "homepage_url": "http://extensionizr.com",
@@ -15,7 +15,7 @@
     "persistent": true
   },
   "options_page": "src/options_custom/index.html",
-  "page_action": {
+  "browser_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "page action demo",
     "default_popup": "src/page_action/page_action.html"
