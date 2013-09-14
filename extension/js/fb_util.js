@@ -8,15 +8,7 @@ function clearLocalData() {
 }
 
 function getUserPage() {
-    chrome.tabs.getAllInWindow(null, function(tabs) {
-        for (var i = 0; i < tabs.length; i++) {
-            if (tabs[i].url.indexOf('/user/' + localStorage.fb_id) >= 0) {
-                chrome.tabs.remove(tabs[i].id);
-                return;
-            }
-        }
-    });
-    window.open('/user/' + localStorage.fb_id);
+    window.open('http://dogear-uho.herokuapp.com/user/' + localStorage.fb_id);
 }
 
 function getLoginData() {
@@ -42,7 +34,6 @@ function getLoginData() {
                                 "fb_id": localStorage.fb_id},
                       function() {});
                 // redirect to user page
-                getUserPage();
             }
         }
 
