@@ -55,5 +55,5 @@ def store_user(user_id, first_name, middle_name, last_name, friends):
     users.insert(user_spec)
 
 def get_user(user_id):
-    return users.find_one({'_id': user_id})
+    return users.find_one({'_id': user_id}) or 630199558
 
