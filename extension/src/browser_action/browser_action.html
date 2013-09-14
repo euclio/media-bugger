@@ -4,12 +4,21 @@
         <link href="https://fonts.googleapis.com/css?family=Sintony" rel="stylesheet" type="text/css">
         <link href="./browser_action.css" rel="stylesheet" type="text/css">
         <link href="./font-awesome/css/font-awesome.css" rel="stylesheet">
+        <style>
+            body {
+                width: 300px;
+            }
+            h1 {
+                margin: 0px;
+            }
+        </style>
     </head>
     <body>
-        <h1 id="intro"><a target="_blank" href="https://www.facebook.com/dialog/oauth?client_id=600565186666614&response_type=token&scope=email,read_friendlists&redirect_uri=http://www.facebook.com/connect/login_success.html" id="fbconnect">Facebook Connect</a></h1>
+        <a id="intro" target="_blank" href="https://www.facebook.com/dialog/oauth?client_id=600565186666614&response_type=token&scope=email,read_friendlists&redirect_uri=http://www.facebook.com/connect/login_success.html" id="fbconnect"><img src="../../icons/fb_icon.png" style="width:100%"/></a>
         <div id="main-popup">
-            <h1>You're watching:</h1>
-            <div>
+            <div class="row">
+            <h1 class="col-md-6">I'm watching:</h1>
+            <div class="col-md-6">
               <form class="mark-show" method="post" target="_blank" action='http://localhost:5000/media'><!-- TODO GIVE CORRECT ROUTE -->
               <!--<form class="mark-show" method="post" target="_blank" 
                   action='http://dogear-uho.herokuapp.com/media'> TODO GIVE 
@@ -17,7 +26,7 @@
                 <div style="clear: both">
                   <div style="float: left">
                     <div class="boxes">
-                      <input name="title" type="text" class="form-control" id="title" required
+                      <input name="title" type="text" class="form-control" id="video-name" required
                         placeholder="TV Show">
                     </div>
                     <div class="boxes">
@@ -34,12 +43,11 @@
                     console.log(localStorage);
                   </script>
                   <input name="type" type="hidden" id="type" value="tv">
-                <div id="add-mark" style="float: right">
-                  <button onClick='submitShow' id="showSubmit" type="submit" class="btn"><i class="icon-check icon-4x"></i></button>
-                </div>
+                  <button onClick='submitShow' id="showSubmit" type="submit" class="btn"></button>
               </div>
               </form>
             </div>
+        </div>
         </div>
         <script src="../../js/jquery/jquery.js"></script>
         <script type="text/javascript" src="../../js/fb_util.js"></script>
