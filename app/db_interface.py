@@ -42,8 +42,14 @@ def store_user(user_id, first_name, middle_name, last_name, friends):
         'first_name': first_name, 
         'middle_name': middle_name,
         'last_name': last_name,
-        'friends': friends}
+        'friends': eval(friends)}
     users.insert(user_spec)
+
+def get_registered_friends(user_id):
+    friends = users.find_one({'_id': user_id})['friends']
+    return [friend_id for friend_id in friends
+            if users.find_one({'_id': friend_id})]
+
 
 def get_user(user_id):
     return users.find_one({'_id': user_id})
