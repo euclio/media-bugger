@@ -4,19 +4,17 @@ from collections import defaultdict
 
 #Creates a Collection for Client also create a interface to db.
 DATABASE = MongoClient('localhost', 27017)["MBuggerDB"]
-users = DATABASE['users']
-users.ensure_index('_time', pymongo.DESCENDING)
-media = DATABASE['media']
+watched = DATABASE['watched']
+tv_shows = DATABASE['tv_shows']
 
 def error():
     return {"ERROR": True}
 
-#User
-def seen_media(self, user_id, title):
+def seen_media(self, user_id, media_type, title, time):
     # Edit the user's seen media and update the time.
     # TODO Currently, the interface doesn't detect the title and attempt to 
     # update it, but instead just inerst a whole new item.
-    target = media.find_one({"title": title})
+    target = media.find_all({"title": title})
     if target == None:
         # TODO In this case, we probably want to query IMDB and add it to the 
         # table, asynchronously
@@ -28,17 +26,21 @@ def seen_media(self, user_id, title):
     users.update(user)
     self.user_data.insert({"CollectionName":"media","MediaID":target["_id"],"TimeStamp":datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),"_time":time.time()})
 
-def seen_episode(self, user_id, title, season, episode):
-    #Edit the user's seen media and update the time.
-    users.find_one({'user_id': user_id})
-    try:
-        episode = user['media']['shows'][title][season][episode]
-    except KeyError:
-        # TODO In this case, we probably want to query IMDB and add it to the 
-        # table, asynchronously
-        return {"ERROR":True,"Cause":"Seen Episode does not exist."}
-    episode['watched'] = True
-    users.update(user)
+def mark_seen_episode(self, user_id, title, season, episode):
+    media_id = tv_shows.find_one({
+        'title': title,
+        'season': season,
+        'episode': episode})['_id']
+    watched.update(
+            {'user_id': user_id, 'media_id': media_id},
+            {'date': datetime.utcnow}, upsert=True)
+
+def recent_shows(self, user_id):
+    recent_shows = (
+            watched.find({'user_id': user_id, 'type': 'tv'})
+            .sort('date')
+            .limit(40))
+    return recent_shows
 
 def recent_items(self,starting_index=0):
     #Gives out the next 40 items after the starting index after sort.
