@@ -18,10 +18,12 @@
   "browser_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "page action demo",
-    "default_popup": "src/page_action/page_action.html"
+    "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
     "management",
-    "notifications"
+    "notifications",
+    "http://www.youtube.com/",
+    "http://www.free-tv-video-online.me/"
   ]
 }
