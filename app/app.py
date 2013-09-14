@@ -26,7 +26,7 @@ def mark_media_watched():
         db.mark_tv_watched(showTitle, season, episode)
     else:
         #TODO add other media.
-	raise ValueError
+        raise ValueError
 
 def recent_shows():
     recent_shows = [{
