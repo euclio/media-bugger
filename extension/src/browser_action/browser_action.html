@@ -23,7 +23,7 @@
             <div class="row">
             <h1 class="col-md-6">I'm watching:</h1>
             <div class="col-md-6">
-              <form class="mark-show" method="post" target="_blank" action='http://localhost:5000/media'><!-- TODO GIVE CORRECT ROUTE -->
+              <form class="mark-show"><!-- TODO GIVE CORRECT ROUTE -->
               <!--<form class="mark-show" method="post" target="_blank" 
                   action='http://dogear-uho.herokuapp.com/media'> TODO GIVE 
               CORRECT ROUTE -->
@@ -40,8 +40,8 @@
                       <label for="episode">Episode: </label>
                       <input name="episode" type="text" class="form-control" id="episode" maxlength="2" size="2">
                     </div>
-                    <button onClick='submitShow' id="showSubmit" type="submit" class="btn" text="Submit"></button>
                   </div>
+                  <button id="showSubmit" type="submit" class="btn" text="Submit"><i class="icon-check icon-4x"></i></button>
                   <input name="fb_id" type="hidden" id="fb_id">
                   <input name="type" type="hidden" id="type" value="tv">
               </div>

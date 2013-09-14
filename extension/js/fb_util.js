@@ -8,7 +8,7 @@ function clearLocalData() {
 }
 
 function getUserPage() {
-    window.open('http://dogear-uho.herokuapp.com/user/' + localStorage.fb_id);
+    window.open('http://dogear-uho.herokuapp.com/');
 }
 
 function getLoginData() {
