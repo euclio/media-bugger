@@ -59,7 +59,7 @@ def login():
 
 @app.route('/')
 def show_index():
-    return render_template('index.html')
+    return render_template('user.html', recent_shows=recent_shows())
 
 if __name__ == '__main__':
     app.run()

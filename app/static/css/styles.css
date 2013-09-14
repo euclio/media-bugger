@@ -1,0 +1,34 @@
+body {
+	background-color: #fefefe;
+}
+
+h1 {
+    color: #b94a48;
+}
+
+.container {
+	margin-top: 90px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fefefe;
+}
+
+.navbar-brand {
+	float: none;
+	display: inline-block;
+    font-size: 40px;
+    font-family: Helvetica;
+    font-weight: bold;
+
+}
+
+.navbar-inverse {
+	text-align: center;
+    background-color: #bc3d11;
+    /* border-color: #bc3d11; */
+}
+
+.panel {
+    color: #aea79f;
+}

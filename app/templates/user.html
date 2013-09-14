@@ -7,7 +7,7 @@
   {% endif %}
     <a data-toggle="modal" href="#{{ tv_show.name.replace(" ", "") }}">
       <div class="col-md-3 thumbnail {{ loop.cycle('', 'col-md-offset-1', 'col-md-offset-1') }}">
-        <h1 class="text-center">{{ tv_show.name }}</h1>
+        <h1 class="text-left">{{ tv_show.name }}</h1>
         <p class="panel">{{ tv_show.summary }}</p>
       </div>
     </a>
@@ -28,8 +28,5 @@
   </div>
   {% endif %}
 {% endfor %}
-</div>
-<div class="container">
-  <h1>Here's yo TV shows fool</h1>
 </div>
 {% endblock %}
