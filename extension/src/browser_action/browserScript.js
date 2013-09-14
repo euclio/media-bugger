@@ -5,14 +5,14 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		function(response) {
 		    if (response.method == "getTV") {
 		    	if (response.tvShow) {
-			   		$('#video-name').val(response.tvShow.tvName);
+			   		$('#title').val(response.tvShow.tvName);
 			   		$('#season').val(response.tvShow.season);
 			   		$('#episode').val(response.tvShow.episode);
 			   	} else {
-			   		$('#video-name').val('Nothing');
+			   		$('#title').val('Nothing');
 			   	}
 			} else {
-				$('#video-name').val(Nothing);
+				$('#title').val(Nothing);
 			}
 		}
 	);
@@ -23,7 +23,7 @@ function submitShow() {
 	var tvData = { 
 		fb_id: localStorage.fb_id,
 		type: 'tv',
-		title: $('#video-name').val(),
+		title: $('#title').val(),
 		season: $('#season').val(),
 		episode: $('#episode').val()
 	};

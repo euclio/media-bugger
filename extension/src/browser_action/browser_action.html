@@ -11,6 +11,10 @@
             h1 {
                 margin: 0px;
             }
+            button {
+                padding: 20px 100px;
+                margin-top: 15px;
+            }
         </style>
     </head>
     <body>
@@ -26,7 +30,7 @@
                 <div style="clear: both">
                   <div style="float: left">
                     <div class="boxes">
-                      <input name="title" type="text" class="form-control" id="video-name" required
+                      <input name="title" type="text" class="form-control" id="title" required
                         placeholder="TV Show">
                     </div>
                     <div class="boxes">
@@ -36,10 +40,10 @@
                       <label for="episode">Episode: </label>
                       <input name="episode" type="text" class="form-control" id="episode" maxlength="2" size="2">
                     </div>
+                    <button onClick='submitShow' id="showSubmit" type="submit" class="btn" text="Submit"></button>
                   </div>
                   <input name="fb_id" type="hidden" id="fb_id">
                   <input name="type" type="hidden" id="type" value="tv">
-                  <button onClick='submitShow' id="showSubmit" type="submit" class="btn"></button>
               </div>
               </form>
             </div>
