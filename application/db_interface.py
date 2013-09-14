@@ -1,7 +1,12 @@
-import time, datetime, pymongo
+import time, datetime, pymongo, os
 
 #Creates a Collection for Client also create a interface to db.
-DATABASE = pymongo.MongoClient('localhost', 27017)["MBuggerDB"]
+MONGO_URL = os.environ.get("MONGOHQ_URL")
+DATABASE = 0
+if MONGO_URL:
+   DATABASE = pymongo.Connection(MONGO_URL)["MBuggerDB"]
+else:
+   DATABASE = pymongo.MongoClient('localhost', 27017)["MBuggerDB"]
 watched = DATABASE['watched']
 tv_shows = DATABASE['tv_shows']
 
