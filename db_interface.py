@@ -8,6 +8,7 @@ if MONGO_URL:
    DATABASE = pymongo.Connection(MONGO_URL)["MBuggerDB"]
 else:
    DATABASE = pymongo.MongoClient('localhost', 27017)["MBuggerDB"]
+users = DATABASE['users']
 watched = DATABASE['watched']
 tv_shows = DATABASE['tv_shows']
 
