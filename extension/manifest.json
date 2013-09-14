@@ -27,6 +27,13 @@
     "http://www.youtube.com/",
     "http://www.free-tv-video-online.me/"
   ],
+  "content_scripts": [
+    {
+      "matches": ["http://youtube.com"],
+      "css": [],
+      "js": ["js/jquery/jquery.min.js"]
+    }
+  ],
   "content_security_policy": 
       "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js; object-src 'self'"
 }
