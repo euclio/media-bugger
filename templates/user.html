@@ -25,17 +25,17 @@
                 <img src="{{ tv_show.imageUrl }}" alt="250x250" class="cover-image">
               </div>
               <div class="rating-bar">
-                Rating goes here maybe
+                <!--Rating goes here maybe-->
               </div>
             </div>
             <div class="tracker-body">
               <div class="last-ep-summary">
-                <h2>Summary of Episode {{ tv_show.lastepsum }}</h2>
-                Summary for the last episode
+                <h2>Summary of Episode {{ tv_show.lastEp }} of Season {{ tv_show.lastSeason }}</h2>
+                {{ tv_show.epSum }}
               </div>
               <div class="show-status">
-                <h2>Episode</h2>
-                Episode tracking part
+                <h2>Next Episode Link</h2>
+                Last time you watched episode {{ tv_show.lastEp }} of season {{ tv_show.lastSeason }}.
               </div>
             </div>
           </div>
