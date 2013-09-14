@@ -16,6 +16,12 @@ if (localStorage.accessToken) {
         localStorage.middle_name = data.middle_name;
         localStorage.last_name = data.last_name;
         localStorage.fb_id = data.id;
+        $('#intro').html('Hello, ' + localStorage.first_name + '!' +
+            '<br /> <a id="logout" href="#">Logout</a>');
+        $('#logout').click(function(e) {
+            clearLocalData();
+            location.reload();
+        });
     }
 
     function processFriends(data) {
@@ -28,16 +34,8 @@ if (localStorage.accessToken) {
 
     $.get(mainUrl, {}, processMain);
     $.get(friendsUrl, {}, processFriends);
-
-    $('#intro').html('Hello, ' + localStorage.first_name + '!' +
-        '<br /> <a id="logout" href="#">Logout</a>');
 } else {
     $('#fbconnect').click(function(e) {
         location.reload();
     });
 }
-
-$('#logout').click(function(e) {
-    clearLocalData();
-    location.reload();
-});
