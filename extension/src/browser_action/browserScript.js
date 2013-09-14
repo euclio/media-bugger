@@ -15,3 +15,15 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		}
 	);
 });
+
+function submitShow() {
+	alert('hi');
+	var tvData = { 
+		fb_id: localStorage.fb_id,
+		type: 'tv',
+		title: $('#video-name').val(),
+		season: $('#season').val(),
+		episode: $('#episode').val()
+	};
+	$.post('http://google.com', tvData, function(data) { });
+}

@@ -18,12 +18,12 @@ def user_page(user_id):
 
 @app.route('/media', methods=['POST'])
 def mark_media_watched():
-    user_id = int(request.form['fb_id'])
-    media_type = request.form['type']
-    showTitle = request.form['title']
+    user_id = int(request.data['fb_id'])
+    media_type = request.data['type']
+    showTitle = request.data['title']
     if media_type == 'tv':
-        season = int(request.form['season'])
-        episode = int(request.form['episode'])
+        season = int(request.data['season'])
+        episode = int(request.data['episode'])
         db.mark_tv_watched(showTitle, season, episode)
     else:
         #TODO add other media.
