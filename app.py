@@ -1,5 +1,6 @@
 from flask import *
 
+import json
 import os
 
 import db_interface as db
@@ -26,7 +27,7 @@ def mark_media_watched():
         db.mark_tv_watched(showTitle, season, episode)
     else:
         #TODO add other media.
-	raise ValueError
+        raise ValueError
 
 def recent_shows():
     recent_shows = [{
@@ -45,6 +46,13 @@ def recent_shows():
     #TODO swap-out
     #return recent_items(request.form['fb_id'])#, request.form['skip_index'])
     return recent_shows
+
+@app.route('/friends', methods=['POST'])
+def registered_friends():
+    user_id = request.form['fb_id']
+    friends = request.form['friends']
+    registered_friends = db.get_registered_friends(user_id)
+    return json.dumps({'friends': regeistered_friends})
 
 @app.route('/login', methods=['POST'])
 def login():

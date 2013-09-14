@@ -1,45 +1,26 @@
-var getTVString = function(tab) {
-    var domain = tab.url.split('.')[1];
-    var tvName = 'Unable to parse TV show name';
-    var ready = false;
+var getTVString = function() {
+    var domain = document.URL.split('.')[1];
+    var tvString = {};
 
     if (domain == 'youtube') {
-        tvName = tab.title;
-        ready = true;
+        tvString.tvName = document.title;
     } else if (domain == 'free-tv-video-online') {
-        chrome.tabs.executeScript(tab.id, {file: '../js/projectvCS.js'});
-        chrome.runtime.onMessage.addListener(
-                function(request, sender, sendResponse) {
-                    if (request.name) {
-                        tvName = request.name;
-                    } else {
-                        tvName = 'not working :(';
-                    }
-                    ready = true;
-                }
-        );
-    } else {
-        ready = true;
+        var freeTvString = document.querySelectorAll("td div h1")[0].innerText;
+        var tvNameMatcher = new RegExp('.* Season');
+        var seasonMatcher = new RegExp('Season [0-9]+');
+        var episodeMatcher = new RegExp('Episode [0-9]+');
+
+        tvString.tvName = freeTvString.match(tvNameMatcher)[0].split(' Season')[0];
+        tvString.season = freeTvString.match(seasonMatcher)[0].split('Season ')[1];
+        tvString.episode = freeTvString.match(episodeMatcher)[0].split('Episode ')[1];
+    } 
+
+    return tvString;
+};
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        var tvString = getTVString();
+        sendResponse({method:'getTV', tvShow: tvString});
     }
-    
-    while (!ready) {};
-    return tvName;
-};
-
-var parseTVNameParts = function(tvString) {
-    var showName;
-    var curSeason;
-    var curEpisode;
-
-    return { showName : tvString, 
-             season : 4,
-             curEpisode : 2 };
-};
-
-$(document).ready(function() {
-    chrome.tabs.query({active:true, currentWindow:true}, function(tabArray) {
-        var tvString = getTVString(tabArray[0]);
-        console.log(tvString);
-        document.getElementById('video-name').innerHTML = tvString;
-    });
-});
+);
