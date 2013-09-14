@@ -25,7 +25,7 @@ if (localStorage.accessToken) {
                         "fb_id": localStorage.fb_id},
               function() {});
         // redirect to user page
-        window.location = '/user/' + localStorage.fb_id;
+        window.open('/user/' + localStorage.fb_id);
     }
 
     function processMain(data) {
