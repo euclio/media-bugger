@@ -22,7 +22,6 @@ function onFacebookLogin() {
                 access = params.split('&')[0]
                 localStorage.accessToken = access;
                 chrome.tabs.remove(tabs[i].id);
-                alert(localStorage.accessToken);
                 getLoginData();
                 return;
             }
