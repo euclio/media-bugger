@@ -12,6 +12,3 @@ var getTVShowName = function() {
     return tvName != undefined ? tvName : 'Unable to parse TV show name';
 };
 
-$(document).ready(function() {
-    $('#video-name').text(getTVShowName());
-});
