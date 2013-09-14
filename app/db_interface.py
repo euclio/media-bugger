@@ -27,10 +27,17 @@ def seen_media(self, user_id, media_type, title, time):
     self.user_data.insert({"CollectionName":"media","MediaID":target["_id"],"TimeStamp":datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),"_time":time.time()})
 
 def mark_seen_episode(self, user_id, title, season, episode):
-    media_id = tv_shows.find_one({
-        'title': title,
-        'season': season,
-        'episode': episode})['_id']
+    tv_spec = {
+            'title': title,
+            'season': season,
+            'episode': episode,
+            }
+    media_id = tv_shows.find_one(title_spec)['_id']
+
+    if media_id is None:
+        # TODO we should query IMDB to get real info
+        media_id = tv.shows.insert(tv_spec)
+
     watched.update(
             {'user_id': user_id, 'media_id': media_id},
             {'date': datetime.utcnow}, upsert=True)
