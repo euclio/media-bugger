@@ -1,7 +1,12 @@
-import time, datetime, pymongo
+import time, datetime, pymongo, os
 
 #Creates a Collection for Client also create a interface to db.
-DATABASE = pymongo.MongoClient('localhost', 27017)["MBuggerDB"]
+MONGO_URL = os.environ.get("MONGOHQ_URL")
+DATABASE = 0
+if MONGO_URL:
+   DATABASE = pymongo.Connection(MONGO_URL)["MBuggerDB"]
+else:
+   DATABASE = pymongo.MongoClient('localhost', 27017)["MBuggerDB"]
 watched = DATABASE['watched']
 tv_shows = DATABASE['tv_shows']
 
@@ -49,7 +54,6 @@ def get_registered_friends(user_id):
     friends = users.find_one({'_id': user_id})['friends']
     return [friend_id for friend_id in friends
             if users.find_one({'_id': friend_id})]
-
 
 def get_user(user_id):
     return users.find_one({'_id': user_id})

@@ -1,31 +1,26 @@
 var getTVString = function() {
     var domain = document.URL.split('.')[1];
-    var tvName = 'Unparsable';
+    var tvString = {};
 
     if (domain == 'youtube') {
-        tvName = document.title;
+        tvString.tvName = document.title;
     } else if (domain == 'free-tv-video-online') {
-        tvName = document.querySelectorAll("td div h1")[0].innerText;
+        var freeTvString = document.querySelectorAll("td div h1")[0].innerText;
+        var tvNameMatcher = new RegExp('.* Season');
+        var seasonMatcher = new RegExp('Season [0-9]+');
+        var episodeMatcher = new RegExp('Episode [0-9]+');
+
+        tvString.tvName = freeTvString.match(tvNameMatcher)[0].split(' Season')[0];
+        tvString.season = freeTvString.match(seasonMatcher)[0].split('Season ')[1];
+        tvString.episode = freeTvString.match(episodeMatcher)[0].split('Episode ')[1];
     } 
 
-    return tvName;
-};
-
-var parseTVNameParts = function(tvString) {
-    var showName;
-    var curSeason;
-    var curEpisode;
-
-    return { showName : tvString, 
-             season : 4,
-             curEpisode : 2 };
+    return tvString;
 };
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log('hey');
         var tvString = getTVString();
-        console.log(tvString);
         sendResponse({method:'getTV', tvShow: tvString});
     }
 );
