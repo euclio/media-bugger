@@ -1,7 +1,12 @@
-var getTVShowName = function() {
-    var domain = activeTab.url;
+var getTVString = function() {
+    var domain;
+    chrome.tabs.getSelected(null, function(tab) {
+        domain = tab.url.split('.')[1];
+    });
     console.log(domain);
+    
     var tvName;
+
     if (domain == 'youtube') {
         tvName = $('title').text;
         console.log("On youtube");
@@ -12,6 +17,18 @@ var getTVShowName = function() {
     return tvName != undefined ? tvName : 'Unable to parse TV show name';
 };
 
+var parseTVNameParts = function(tvString) {
+    var showName;
+    var curSeason;
+    var curEpisode;
+
+    return { showName : tvString, 
+             season : 4,
+             curEpisode : 2 };
+};
+
 $(document).ready(function() {
-    $('#video-name').text(getTVShowName());
+    var tvString = getTVString();
+    var tvParts = parseTVNameParts();
+    $('#video-name').text(tvParts.showName);
 });
