@@ -20,10 +20,9 @@ function onFacebookLogin() {
                 var params = tabs[i].url.split('#')[1];
                 access = params.split('&')[0]
                 localStorage.accessToken = access;
-                chrome.tabs.onUpdated.removeListener(onFacebookLogin);
                 chrome.tabs.remove(tabs[i].id);
                 return;
-            }   
+            }
         }   
     }); 
 }   

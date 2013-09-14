@@ -20,6 +20,12 @@ if (localStorage.accessToken) {
     $.get(mainUrl, {}, processMain);
     $.get(friendsUrl, {}, processFriends);
 
+    if (localStorage.fb_id === undefined) {
+        // log out
+        localStorage.removeItem('accessToken');
+        location.reload();
+    }
+
     $('#intro').html('Hello, ' + localStorage.first_name + '!' +
         '<br /> <a id="logout" href="#">Logout</a>');
 } else {
