@@ -1,39 +1,55 @@
 from pymongo import MongoClient
-import time,datetime,pymongo
+import time, datetime, pymongo
+from collections import defaultdict
 
-class db_interface:
-  def error():
+#Creates a Collection for Client also create a interface to db.
+DATABASE = MongoClient('localhost', 27017)["MBuggerDB"]
+watched = DATABASE['watched']
+tv_shows = DATABASE['tv_shows']
+
+def error():
     return {"ERROR": True}
-  def __init__(self,UserName):
-    #Creates a Collection for Client also create a interface to db.
-    self.db = MongoClient('localhost',27017)["MBuggerDB"]
-    if UserName not in self.db.collection_names(include_system_collections=False):
-      self.db.create_collection(UserName)
-    self.user_data = self.db[UserName]
-    self.user_data.ensure_index(("_time", pymongo.DESCENDING))
-    if "media" not in self.db.collection_names(include_system_collections=False):
-      self.db.create_collection("media")
-    self.media = self.db["media"]
-#User's collection will be documents of {"CollectionName":_, "id":_id,"Time": timeStamp,"_time": time in miliseconds}    
-    
-    
 
-    #User
-  def seen_media(self, Title):
-    #Edit the user's seen media and update the time.
-    #TODO Currently, the interface doesn't detect the title and attempt to update it, but instead just inerst a whole new item.
-    target = self.media.find_one({"Title":Title})
+def seen_media(self, user_id, media_type, title, time):
+    # Edit the user's seen media and update the time.
+    # TODO Currently, the interface doesn't detect the title and attempt to 
+    # update it, but instead just inerst a whole new item.
+    target = media.find_all({"title": title})
     if target == None:
+        # TODO In this case, we probably want to query IMDB and add it to the 
+        # table, asynchronously
         return {"ERROR":True,"Cause":"Seen Media does not exist."}
+    user = users.find_one({'user_id': user_id})
+    episode
+    user['media']['shows'][title][season][episode]['watched'] = True
+    user['media']
+    users.update(user)
     self.user_data.insert({"CollectionName":"media","MediaID":target["_id"],"TimeStamp":datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),"_time":time.time()})
 
-  def seen_episode(self,Show, Season,Episode):
-    #Edit the user's seen media and update the time.
-    target = self.db[Show + "_"+Season].find_one({"Title":Episode})
-    if target == None:
-        return {"ERROR":True,"Cause":"Seen Episode does not exist."}
-    self.user_data.insert({"CollectionName":Show+"_"+Season,"EpisodeID":target["_id"],"TimeStamp":datetime.datetime.fromtimestamp(time.time()).strftime("%Y-%m-%d %H:%M:%S"),"_time":time.time()})
-  def recent_items(self,starting_index=0):
+def mark_seen_episode(self, user_id, title, season, episode):
+    tv_spec = {
+            'title': title,
+            'season': season,
+            'episode': episode,
+            }
+    media_id = tv_shows.find_one(title_spec)['_id']
+
+    if media_id is None:
+        # TODO we should query IMDB to get real info
+        media_id = tv.shows.insert(tv_spec)
+
+    watched.update(
+            {'user_id': user_id, 'media_id': media_id},
+            {'date': datetime.utcnow}, upsert=True)
+
+def recent_shows(self, user_id):
+    recent_shows = (
+            watched.find({'user_id': user_id, 'type': 'tv'})
+            .sort('date')
+            .limit(40))
+    return recent_shows
+
+def recent_items(self,starting_index=0):
     #Gives out the next 40 items after the starting index after sort.
     ending_index = starting_index + 40
     if self.user_data.count() < ending_index:
@@ -43,51 +59,44 @@ class db_interface:
         else:
             starting_index = ending_index - 40
     return self.user_data.find(sort={"_time":-1})[starting_index:ending_index]
-    
-    	
 
 
-
-
-
-
-     #Media
-  def get_media(self, Title):
+#Media
+def get_media(self, Title):
     #get a media from the media collection.
     ans = self.media.find_one({"Title":Title})
     if ans == None:
-      return {"ERROR": True, "Cause": "Given Media Not Found: " + Title}
+        return {"ERROR": True, "Cause": "Given Media Not Found: " + Title}
     return ans
-    
-  def add_media(self, Title, Summ, Type, Links = []):
+
+def add_media(self, Title, Summ, Type, Links = []):
     #add a media to the media collection.
     self.media.insert({"Title":Title,"Summ":Summ,"Type":Type,"Links":Links})
-    
-  def add_link_media(self, Title, Links):
+
+def add_link_media(self, Title, Links):
     #add link to the media.  This is mainly for non TV shows items such as books and movies.
     target = self.media.find_one({"Title":Title})
     if target == None:
-      return {"ERROR": True, "Cuase": "Given Media Not Found: " + Title}
-    target["Links"] += Links
-    self.media.update({'_id':target['_id']},target)
-    
-    
-    
-    #Episode Only for TV Shows
-  def get_episode(self,Title, Show, Season, Number):
-    #get the episdoe
-    ans = self.db[Show + "_"+Season].find_one({"Title":Title})
-    if ans == None:
-      return {"ERROR": True, "Cause": "Given Episode Not Found: " + Title}
-  def add_episode(self,Title, Show, Summ, Season, Number, Links = []):
-    #Automatically inserts TV_Episodes as Type
-    self.db[Show+"_"+Season].insert({"Title":Title,"Summ":Summ,"Type":"TV Episode","Links":Links,"Show":Show,"Season": Season})
-    #return bool
-  def add_link_episode(self, Title, Show, Season, Number):
-    #add link to the episode.
-    target = self.db[Show+"_"+Season].find_one({"Title":Title})
-    if target == None:
-      return {"ERROR": True, "Cuase": "Given TV Epispode Not Found: " + Title}
+        return {"ERROR": True, "Cuase": "Given Media Not Found: " + Title}
     target["Links"] += Links
     self.media.update({'_id':target['_id']},target)
 
+#Episode Only for TV Shows
+def get_episode(self,Title, Show, Season, Number):
+    #get the episdoe
+    ans = self.db[Show + "_"+Season].find_one({"Title":Title})
+    if ans == None:
+        return {"ERROR": True, "Cause": "Given Episode Not Found: " + Title}
+
+def add_episode(self,Title, Show, Summ, Season, Number, Links = []):
+    #Automatically inserts TV_Episodes as Type
+    self.db[Show+"_"+Season].insert({"Title":Title,"Summ":Summ,"Type":"TV Episode","Links":Links,"Show":Show,"Season": Season})
+    #return bool
+
+def add_link_episode(self, Title, Show, Season, Number):
+    #add link to the episode.
+    target = self.db[Show+"_"+Season].find_one({"Title":Title})
+    if target == None:
+        return {"ERROR": True, "Cuase": "Given TV Epispode Not Found: " + Title}
+    target["Links"] += Links
+    self.media.update({'_id':target['_id']},target)
