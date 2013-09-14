@@ -35,7 +35,11 @@
               </div>
               <div class="show-status">
                 <h2>Next Episode Link</h2>
-                Last time you watched episode {{ tv_show.lastEp }} of season {{ tv_show.lastSeason }}.
+                {% if tv_show.nextEpLink %}
+                Watch the next episode on <a href="{{tv_show.nextEpLink}}">Project Free TV</a>.
+                {% else%}
+                The next episode is not out yet :(
+                {% endif %}
               </div>
             </div>
           </div>
@@ -45,6 +49,7 @@
   {% if loop.index is divisibleby 3 %}
   </div>
   {% endif %}
-{% endfor %}
+  {% endfor %}
+  <p></p>
 </div>
 {% endblock %}
