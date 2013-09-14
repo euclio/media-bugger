@@ -10,7 +10,7 @@ app.debug = True
 
 @app.route('/user/<int:user_id>', methods=['GET'])
 def user_page(user_id):
-    if request.methods == 'GET':
+    if request.method == 'GET':
         user = db.get_user(user_id)
         recent_shows = db.recent_shows(user_id)
         return render_template('user.html', user=user, 
