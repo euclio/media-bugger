@@ -21,6 +21,7 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
+    "tabs",
     "activeTab",
     "management",
     "notifications",
@@ -29,9 +30,9 @@
   ],
   "content_scripts": [
     {
-      "matches": ["http://youtube.com/"],
+      "matches": ["http://youtube.com/", "http://www.free-tv-video-online.me/"],
       "css": [],
-      "js": ["js/jquery/jquery.min.js"]
+      "js": ["js/jquery/jquery.min.js", "js/script.js"]
     }
   ],
   "content_security_policy": 
