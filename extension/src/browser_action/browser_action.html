@@ -15,14 +15,15 @@
               <form class="mark-show" action='http://localhost:8000/media'>
               <div style="clear: both">
                 <div style="float: left">
-                  <div>
-                    <label for="title">TV Show</label>
-                    <input type="text" class="form-control" id="title" required>
+                  <div class="boxes">
+                    <input type="text" class="form-control" id="title" required
+                      placeholder="TV Show">
                   </div>
-                  <div>
-                    <label for="season">Season</label>
-                    <input type="text" class="form-control" id="season" maxlength="2" size="2">
-                    <label for="episode">Episode</label>
+                  <div class="boxes">
+                    <label for="season">Season: </label>
+                    <input type="text" class="form-control" id="season" maxlength="2" size="2"
+                      placeholder="Season">
+                    <label for="episode">Episode: </label>
                     <input type="text" class="form-control" id="episode" maxlength="2" size="2">
                   </div>
                 </div>
