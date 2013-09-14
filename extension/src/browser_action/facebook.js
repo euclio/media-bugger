@@ -1,3 +1,12 @@
+function clearLocalData() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('first_name');
+    localStorage.removeItem('middle_name');
+    localStorage.removeItem('last_name');
+    localStorage.removeItem('fb_id');
+    localStorage.removeItem('friends');
+}
+
 if (localStorage.accessToken) {
     var mainUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
     var friendsUrl = "https://graph.facebook.com/me/friends?" + localStorage.accessToken;
@@ -20,12 +29,6 @@ if (localStorage.accessToken) {
     $.get(mainUrl, {}, processMain);
     $.get(friendsUrl, {}, processFriends);
 
-    if (localStorage.fb_id === undefined) {
-        // log out
-        localStorage.removeItem('accessToken');
-        location.reload();
-    }
-
     $('#intro').html('Hello, ' + localStorage.first_name + '!' +
         '<br /> <a id="logout" href="#">Logout</a>');
 } else {
@@ -35,6 +38,6 @@ if (localStorage.accessToken) {
 }
 
 $('#logout').click(function(e) {
-    localStorage.removeItem('accessToken');
+    clearLocalData();
     location.reload();
 });
