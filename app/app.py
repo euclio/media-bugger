@@ -43,7 +43,6 @@ def recent_shows():
                 'summary': 'Test 2'
         }]
     #TODO swap-out
-    
     #return recent_items(request.form['fb_id'])#, request.form['skip_index'])
     return recent_shows
 
@@ -56,7 +55,6 @@ def login():
         middle_name = request.form['middle_name'],
         last_name = request.form['last_name'],
         friends = request.form['friends'])
-
 
 @app.route('/')
 def show_index():
