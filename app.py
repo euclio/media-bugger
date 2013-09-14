@@ -25,7 +25,7 @@ def mark_media_watched():
     if media_type == 'tv':
         season = int(request.form['season'])
         episode = int(request.form['episode'])
-        db.mark_tv_watched(showTitle, season, episode)
+        db.mark_seen_episode(user_id, showTitle, season, episode)
     else:
         #TODO add other media.
         raise ValueError

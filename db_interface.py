@@ -1,4 +1,5 @@
-import time, datetime, pymongo, os
+import pymongo, os
+from datetime import datetime
 
 #Creates a Collection for Client also create a interface to db.
 MONGO_URL = os.environ.get("MONGOHQ_URL")
@@ -11,18 +12,20 @@ watched = DATABASE['watched']
 tv_shows = DATABASE['tv_shows']
 
 
-def mark_seen_episode(self, user_id, title, season, episode):
+def mark_seen_episode(user_id, title, season, episode):
     tv_spec = {
         'title': title,
         'season': season,
         'episode': episode}
-    media_id = tv_shows.find_one(title_spec)['_id']
-    if media_id is None:
+    media_doc = tv_shows.find_one(tv_spec)
+    if media_doc:
+        media_id = media_doc['_id']
+    else:
         # TODO we should query IMDB to get real info
-        media_id = tv.shows.insert(tv_spec)
+        media_id = tv_shows.insert(tv_spec)
     watched.update(
         {'user_id': user_id, 'media_id': media_id},
-        {'date': datetime.utcnow},
+        {'date': datetime.utcnow()},
         upsert=True)
 
 def recent_shows(self, user_id,starting_index=0):
