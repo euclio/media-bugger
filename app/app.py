@@ -2,7 +2,7 @@ from flask import *
 
 import os
 
-import db_interface
+import db_interface as db
 
 app = Flask(__name__)
 app.debug = True
@@ -10,8 +10,8 @@ app.debug = True
 @app.route('/user/<int:user_id>', methods=['GET'])
 def user_page(user_id):
     if request.methods == 'GET':
-        user = db_interface.get_user(user_id)
-        recent_shows = db_interface.recent_shows(user_id)
+        user = db.get_user(user_id)
+        recent_shows = db.recent_shows(user_id)
         return render_template('user.html', user=user, 
                 recent_shows=recent_shows)
 
@@ -19,34 +19,29 @@ def user_page(user_id):
 def mark_media_watched():
     user_id = int(request.form['fb_id'])
     media_type = request.form['type']
-    title = request.form['title']
+    showTitle = request.form['title']
     if media_type == 'tv':
         season = int(request.form['season'])
         episode = int(request.form['episode'])
-        db_interface.mark_tv_watched(title, season, episode)
+        db.mark_tv_watched(showTitle, season, episode)
     else:
         #TODO add other media.
 	raise ValueError
 
 def recent_shows():
-    recent_shows = [
-            {
+    recent_shows = [{
                 'name': 'King of the Hill',
                 'summary': 'This is a cool show'
-            },
-            {
+            },{
                 'name': 'The Big Bang Theory',
                 'summary': 'This show is silly'
-            },
-            {
+            },{
                 'name': 'Test 1',
                 'summary': 'Test'
-            },
-            {
+            },{
                 'name': 'Test 2',
                 'summary': 'Test 2'
-            }
-        ]
+        }]
     #TODO swap-out
     
     #return recent_items(request.form['fb_id'])#, request.form['skip_index'])
@@ -55,11 +50,12 @@ def recent_shows():
 @app.route('/login', methods=['POST'])
 def login():
     # TODO There is no way that this is secure #HackathonSwag
-    user_id = request.form['fb_id']
-    first_name = request.form['first_name']
-    middle_name = request.form['middle_name']
-    last_name = request.form['last_name']
-    db_interface.store_user(user_id, first_name, middle_name, friends)
+    db.store_user(
+        user_id = request.form['fb_id'],
+        first_name = request.form['first_name'],
+        middle_name = request.form['middle_name'],
+        last_name = request.form['last_name'],
+        friends = request.form['friends'])
 
 
 @app.route('/')
