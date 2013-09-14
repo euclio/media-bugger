@@ -1,12 +1,20 @@
 <!doctype html>
 <head>
-<title>DogEar</title>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<title>DogEar</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+
 </head>
 <body>
-<nav class="navbar navbar-inverse" role="navigation">
-  <a class="navbar-brand" href="{{ url_for('show_index') }}">DogEar</a>
-</nav>
-{% block content %}
-{% endblock %}
+	<nav class="navbar navbar-inverse" role="navigation">
+	  <a class="navbar-brand" href="{{ url_for('show_index') }}">DogEar</a>
+	</nav>
+
+	{% block content %}
+	{% endblock %}
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </body>
