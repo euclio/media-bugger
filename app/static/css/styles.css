@@ -6,6 +6,12 @@ h1 {
   color: #b94a48;
 }
 
+h2 {
+  color: #585858;
+  font-size: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
 .container {
 	margin-top: 90px;
 }
@@ -53,4 +59,27 @@ h1 {
 
 #menu-icon {
   -webkit-filter: invert(100%);
+}
+
+.modal-title {
+  color: #b94a48;
+}
+
+.modal-dialog {
+  width: 800px;
+}
+
+.modal-content {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.aside {
+  width: 200px;
+  float: left;
+}
+
+.tracker-body {
+  margin-left: 300px;
+  width: 400px;
 }

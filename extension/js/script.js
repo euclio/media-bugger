@@ -1,28 +1,13 @@
-var getTVString = function(tab) {
-    var domain = tab.url.split('.')[1];
-    var tvName = 'Unable to parse TV show name';
-    var ready = false;
+var getTVString = function() {
+    var domain = document.URL.split('.')[1];
+    var tvName = 'Unparsable';
 
     if (domain == 'youtube') {
-        tvName = tab.title;
-        ready = true;
+        tvName = document.title;
     } else if (domain == 'free-tv-video-online') {
-        chrome.tabs.executeScript(tab.id, {file: '../js/projectvCS.js'});
-        chrome.runtime.onMessage.addListener(
-                function(request, sender, sendResponse) {
-                    if (request.name) {
-                        tvName = request.name;
-                    } else {
-                        tvName = 'not working :(';
-                    }
-                    ready = true;
-                }
-        );
-    } else {
-        ready = true;
-    }
-    
-    while (!ready) {};
+        tvName = document.querySelectorAll("td div h1")[0].innerText;
+    } 
+
     return tvName;
 };
 
@@ -36,10 +21,11 @@ var parseTVNameParts = function(tvString) {
              curEpisode : 2 };
 };
 
-$(document).ready(function() {
-    chrome.tabs.query({active:true, currentWindow:true}, function(tabArray) {
-        var tvString = getTVString(tabArray[0]);
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        console.log('hey');
+        var tvString = getTVString();
         console.log(tvString);
-        document.getElementById('video-name').innerHTML = tvString;
-    });
-});
+        sendResponse({method:'getTV', tvShow: tvString});
+    }
+);
