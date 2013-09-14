@@ -1,0 +1,16 @@
+body {
+	background-color: #E3E3E3;
+}
+
+.container {
+	margin-top: 60px;
+}
+
+.navbar-brand {
+	float: none;
+	display: inline-block;
+}
+
+.navbar-inverse {
+	text-align: center;
+}
