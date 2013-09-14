@@ -24,6 +24,9 @@ def mark_media_watched():
         season = int(request.form['season'])
         episode = int(request.form['episode'])
         db_interface.mark_tv_watched(title, season, episode)
+    else:
+        #TODO add other media.
+	raise ValueError
 
 def recent_shows():
     recent_shows = [
@@ -44,7 +47,9 @@ def recent_shows():
                 'summary': 'Test 2'
             }
         ]
-
+    #TODO swap-out
+    
+    #return recent_items(request.form['fb_id'])#, request.form['skip_index'])
     return recent_shows
 
 @app.route('/login', methods=['POST'])

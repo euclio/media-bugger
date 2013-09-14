@@ -40,23 +40,21 @@ def mark_seen_episode(self, user_id, title, season, episode):
             {'user_id': user_id, 'media_id': media_id},
             {'date': datetime.utcnow}, upsert=True)
 
-def recent_shows(self, user_id):
+def recent_shows(self, user_id,starting_index=0):
     recent_shows = (
             watched.find({'user_id': user_id, 'type': 'tv'})
             .sort('date')
+            .skip(starting_index)
             .limit(40))
     return recent_shows
 
-def recent_items(self,starting_index=0):
-    #Gives out the next 40 items after the starting index after sort.
-    ending_index = starting_index + 40
-    if self.user_data.count() < ending_index:
-        ending_index = self.user_data.count()-1
-        if ending_index - 40 <0:
-            starting_index=0
-        else:
-            starting_index = ending_index - 40
-    return self.user_data.find(sort={"_time":-1})[starting_index:ending_index]
+def recent_items(self, user_id,starting_index=0):
+    recent_media = (  
+            watched.find({'user_id': user_id})
+            .sort('date')
+            .skip(starting_index)
+            .limit(40))
+    return recent_media
 
 def store_user(user_id, first_name, last_name, middle_name, friends):
     users.insert({
