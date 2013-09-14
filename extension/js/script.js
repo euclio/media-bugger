@@ -7,14 +7,17 @@ var getTVString = function(tab) {
         tvName = tab.title;
         ready = true;
     } else if (domain == 'free-tv-video-online') {
-        chrome.tabs.executeScript(tab.id, 
-                {code: 'var name=document.querySelectorAll("td div h1")[0].innerText; name'},
-            function(name) {
-                tvName = name; 
-                console.log(tvName);
-                ready = true;
-            }
-        );    
+        chrome.tabs.executeScript(tab.id, {file: '../js/projectvCS.js'});
+        chrome.runtime.onMessage.addListener(
+                function(request, sender, sendResponse) {
+                    if (request.name) {
+                        tvName = request.name;
+                    } else {
+                        tvName = 'not working :(';
+                    }
+                    ready = true;
+                }
+        );
     } else {
         ready = true;
     }
