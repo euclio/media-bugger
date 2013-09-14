@@ -24,6 +24,14 @@ function updatePage() {
     }); 
 }
 
+function getPictureUrl(fb_id) {
+    if (localStorage.accessToken !== undefined) {
+        return "https://graph.facebook.com/" + fb_id + "/picture?" + localStorage.accessToken;
+    } else {
+        return "";
+    }
+}
+
 function getLoginData() {
     console.log(localStorage);
     if (localStorage.accessToken !== undefined) {
