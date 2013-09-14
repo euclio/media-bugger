@@ -1,8 +1,17 @@
 if (localStorage.accessToken) {
-    var graphUrl = "https://graph.facebook.com/me?" + localStorage.accessToken + "&callback=displayUser";
-    console.log(graphUrl);
+    var mainUrl = "https://graph.facebook.com/me?" + localStorage.accessToken;
+    var friendsUrl = "https://graph.facebook.com/me/friends?" + localStorage.accessToken;
+    console.log(mainUrl);
+    console.log(friendsUrl);
 
-    function displayUser(user) {
-        console.log(user);
+    function processMain(data) {
+        console.log(data);
     }
+
+    function processFriends(data) {
+        console.log(data);
+    }
+
+    $.get(mainUrl, {}, processMain);
+    $.get(friendsUrl, {}, processFriends);
 } 
