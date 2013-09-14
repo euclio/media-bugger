@@ -9,18 +9,14 @@ function clearLocalData() {
 
 function getUserPage() {
     chrome.tabs.getAllInWindow(null, function(tabs) {
-        var found = false;
         for (var i = 0; i < tabs.length; i++) {
             if (tabs[i].url.indexOf('/user/' + localStorage.fb_id) >= 0) {
-                chrome.tabs.reload(tabs[i].id);
-                found = true;
+                chrome.tabs.remove(tabs[i].id);
                 return;
             }
         }
-        if (!found) {
-            window.open('/user/' + localStorage.fb_id);
-        }
     });
+    window.open('/user/' + localStorage.fb_id);
 }
 
 function getLoginData() {
