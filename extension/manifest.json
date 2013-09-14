@@ -25,16 +25,17 @@
     "activeTab",
     "management",
     "notifications",
-    "http://www.youtube.com/",
-    "http://www.free-tv-video-online.me/"
+    "http://www.youtube.com/*",
+    "http://www.free-tv-video-online.me/*"
   ],
   "content_scripts": [
     {
-      "matches": ["http://youtube.com/", "http://www.free-tv-video-online.me/"],
+      "matches": ["http://youtube.com/*", "http://www.free-tv-video-online.me/*"],
       "css": [],
       "js": ["js/jquery/jquery.min.js", "js/script.js"]
     }
   ],
   "content_security_policy": 
-      "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js; object-src 'self'"
+      "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js; object-src 'self'",
+  "web_accessible_resources": ["js/jquery/jquery.min.js", "js/jquery/jquery.min.map"]
 }
