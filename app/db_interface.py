@@ -10,19 +10,6 @@ tv_shows = DATABASE['tv_shows']
 def error():
     return {"ERROR": True}
 
-def seen_media(self, user_id, media_type, title, time):
-    # Edit the user's seen media and update the time.
-    # TODO Currently, the interface doesn't detect the title and attempt to 
-    # update it, but instead just inerst a whole new item.
-    target = media.find_all({"title": title})
-    if target == None: # TODO In this case, we probably want to query IMDB and add it to the 
-        # table, asynchronously
-        return {"ERROR":True,"Cause":"Seen Media does not exist."}
-    user = users.find_one({'user_id': user_id})
-    user['media']['shows'][title][season][episode]['watched'] = True
-    user['media']
-    users.update(user)
-    self.user_data.insert({"CollectionName":"media","MediaID":target["_id"],"TimeStamp":datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S'),"_time":time.time()})
 
 def mark_seen_episode(self, user_id, title, season, episode):
     tv_spec = {
