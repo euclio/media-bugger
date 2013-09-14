@@ -15,12 +15,10 @@ def seen_media(self, user_id, media_type, title, time):
     # TODO Currently, the interface doesn't detect the title and attempt to 
     # update it, but instead just inerst a whole new item.
     target = media.find_all({"title": title})
-    if target == None:
-        # TODO In this case, we probably want to query IMDB and add it to the 
+    if target == None: # TODO In this case, we probably want to query IMDB and add it to the 
         # table, asynchronously
         return {"ERROR":True,"Cause":"Seen Media does not exist."}
     user = users.find_one({'user_id': user_id})
-    episode
     user['media']['shows'][title][season][episode]['watched'] = True
     user['media']
     users.update(user)
@@ -60,6 +58,16 @@ def recent_items(self,starting_index=0):
             starting_index = ending_index - 40
     return self.user_data.find(sort={"_time":-1})[starting_index:ending_index]
 
+def store_user(user_id, first_name, last_name, middle_name, friends):
+    users.insert({
+        '_id': user_id,
+        'first_name': first_name,
+        'middle_name': middle_name,
+        'last_name': last_name,
+        'friends': friends})
+
+def get_user(user_id):
+    return users.find_one({'_id': user_id})
 
 #Media
 def get_media(self, Title):
