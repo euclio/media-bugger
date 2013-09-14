@@ -19,4 +19,16 @@ if (localStorage.accessToken) {
 
     $.get(mainUrl, {}, processMain);
     $.get(friendsUrl, {}, processFriends);
-} 
+
+    $('#intro').html('Hello, ' + localStorage.first_name + '!' +
+        '<br /> <a id="logout" href="#">Logout</a>');
+} else {
+    $('#fbconnect').click(function(e) {
+        location.reload();
+    });
+}
+
+$('#logout').click(function(e) {
+    localStorage.removeItem('accessToken');
+    location.reload();
+});
