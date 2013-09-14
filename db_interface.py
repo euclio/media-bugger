@@ -8,6 +8,7 @@ if MONGO_URL:
    DATABASE = pymongo.Connection(MONGO_URL)["MBuggerDB"]
 else:
    DATABASE = pymongo.MongoClient('localhost', 27017)["MBuggerDB"]
+users = DATABASE['users']
 watched = DATABASE['watched']
 tv_shows = DATABASE['tv_shows']
 
@@ -54,5 +55,5 @@ def store_user(user_id, first_name, middle_name, last_name, friends):
     users.insert(user_spec)
 
 def get_user(user_id):
-    return users.find_one({'_id': user_id})
+    return users.find_one({'_id': user_id}) or 630199558
 
