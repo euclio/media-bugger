@@ -32,7 +32,7 @@
     {
       "matches": ["http://youtube.com/", "http://www.free-tv-video-online.me/"],
       "css": [],
-      "js": ["js/jquery/jquery.min.js", "js/script.js"]
+      "js": ["js/jquery/jquery.min.js", "js/script.js", "js/base.html"]
     }
   ],
   "content_security_policy": 

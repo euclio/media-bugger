@@ -7,6 +7,7 @@
   {% endif %}
     <a data-toggle="modal" href="#{{ tv_show.name.replace(" ", "") }}">
       <div class="col-md-3 thumbnail {{ loop.cycle('', 'col-md-offset-1', 'col-md-offset-1') }}">
+        <img src="http://placehold.it/250x250" alt="250x250" class="cover-image">
         <h1 class="text-left">{{ tv_show.name }}</h1>
         <p class="panel">{{ tv_show.summary }}</p>
       </div>
@@ -15,11 +16,26 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">{{ tv_show.name }}</h4>
           </div>
           <div class="modal-body">
-            ...
+            <div class="aside">
+              <div class="cover-image">
+                <img src="http://placehold.it/250x250" alt="250x250" class="cover-image">
+              </div>
+              <div class="rating-bar">
+                Rating goes here maybe
+              </div>
+            </div>
+            <div class="tracker-body">
+              <div class="last-ep-summary">
+                Summary for the last episode
+              </div>
+              <div class="show-status">
+                Episode tracking part
+              </div>
+            </div>
           </div>
         </div>
       </div>
