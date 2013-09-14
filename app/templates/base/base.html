@@ -1,14 +1,27 @@
 <!doctype html>
 <head>
-	<title>DogEar</title>
+  <title>DogEar</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 	<link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
 	<link rel="stylesheet" href="/static/css/styles.css"
-
+  <script src="base.js">
 </head>
 <body>
-	<nav class="navbar-fixed-top navbar-inverse" role="navigation">
-	  <a class="navbar-brand" href="{{ url_for('show_index') }}">DogEar</a>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="nav-container">
+      <a class="navbar-brand" href="{{ url_for('show_index') }}">DogEar</a>
+    <ul class="nav navbar-nav navbar-right">
+      <li><img src="../../static/ico/menu.png" class="dropdown-toggle"
+               id="menu-icon" data-toggle="dropdown">
+        <ul class="dropdown-menu">
+          <li><a href="#">Friends</a></li>
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </li>
+    </ul>
+    </div>
 	</nav>
 
 	{% block content %}

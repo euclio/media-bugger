@@ -1,8 +1,8 @@
 {
-  "name": "Media Bugger",
+  "name": "DogEar",
   "version": "1.0",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.io",
+  "description": "Keep track of what you've watched and figure out what to watch next",
   "homepage_url": "http://extensionizr.com",
   "icons": {
     "16": "icons/icon16.png",

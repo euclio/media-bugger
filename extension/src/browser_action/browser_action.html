@@ -3,19 +3,36 @@
     <head>
         <link href="https://fonts.googleapis.com/css?family=Sintony" rel="stylesheet" type="text/css">
         <link href="./browser_action.css" rel="stylesheet" type="text/css">
+        <link href="./font-awesome/css/font-awesome.css" rel="stylesheet">
     </head>
     <body>
         <h1 id="intro"><a target="_blank" href="https://www.facebook.com/dialog/oauth?client_id=600565186666614&response_type=token&scope=email,read_friendlists&redirect_uri=http://www.facebook.com/connect/login_success.html" id="fbconnect">Facebook Connect</a></h1>
         <div id="main-popup">
             <h1>You're watching:</h1>
             <div>
-                <p id="video-name"></p>    
-            </div>
-            <div id="add-mark">
-                <!--buttons go here-->
+              <form class="mark-show" action='http://localhost:8000/media'>
+              <div style="clear: both">
+                <div style="float: left">
+                  <div class="boxes">
+                    <input type="text" class="form-control" id="title" required
+                      placeholder="TV Show">
+                  </div>
+                  <div class="boxes">
+                    <label for="season">Season: </label>
+                    <input type="text" class="form-control" id="season" maxlength="2" size="2"
+                      placeholder="Season">
+                    <label for="episode">Episode: </label>
+                    <input type="text" class="form-control" id="episode" maxlength="2" size="2">
+                  </div>
+                </div>
+                <div id="add-mark" style="float: right">
+                  <button type="submit" class="btn"><i class="icon-check icon-4x"></i></button>
+                </div>
+              </div>
             </div>
         </div>
         <script src="../../js/jquery/jquery.js"></script>
+        <script type="text/javascript" src="../../js/fb_util.js"></script>
         <script type="text/javascript" src="facebook.js"></script>
         <script src="browserScript.js"></script>
     </body>
