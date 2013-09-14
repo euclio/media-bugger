@@ -55,7 +55,6 @@ def get_registered_friends(user_id):
     return [friend_id for friend_id in friends
             if users.find_one({'_id': friend_id})]
 
-
 def get_user(user_id):
     return users.find_one({'_id': user_id})
 

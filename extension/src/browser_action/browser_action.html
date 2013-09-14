@@ -10,25 +10,31 @@
         <div id="main-popup">
             <h1>You're watching:</h1>
             <div>
-              <form class="mark-show" action='/media'>
-              <div style="clear: both">
-                <div style="float: left">
-                  <div class="boxes">
-                    <input type="text" class="form-control" id="video-name" required
-                      placeholder="TV Show">
+              <form class="mark-show" method="post" target="_blank" action='http://dogear-uho.herokuapp.com/media'><!-- TODO GIVE CORRECT ROUTE -->
+                <div style="clear: both">
+                  <div style="float: left">
+                    <div class="boxes">
+                      <input type="text" class="form-control" id="title" required
+                        placeholder="TV Show">
+                    </div>
+                    <div class="boxes">
+                      <label for="season">Season: </label>
+                      <input type="text" class="form-control" id="season" maxlength="2" size="2"
+                        placeholder="Season">
+                      <label for="episode">Episode: </label>
+                      <input type="text" class="form-control" id="episode" maxlength="2" size="2">
+                    </div>
                   </div>
-                  <div class="boxes">
-                    <label for="season">Season: </label>
-                    <input type="text" class="form-control" id="season" maxlength="2" size="2"
-                      placeholder="Season">
-                    <label for="episode">Episode: </label>
-                    <input type="text" class="form-control" id="episode" maxlength="2" size="2">
+                  <input type="hidden" id="fb_id">
+                  <script>
+                    $("#fb_id").attr('value', localStorage.fb_id);
+                  </script>
+                  <input type="hidden" id="type" value="tv">
+                  <div id="add-mark" style="float: right">
+                    <button type="submit" class="btn"><i class="icon-check icon-4x"></i></button>
                   </div>
                 </div>
-                <div id="add-mark" style="float: right">
-                  <button type="submit" class="btn"><i class="icon-check icon-4x"></i></button>
-                </div>
-              </div>
+              </form>
             </div>
         </div>
         <script src="../../js/jquery/jquery.js"></script>

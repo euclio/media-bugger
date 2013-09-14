@@ -26,7 +26,8 @@
     "management",
     "notifications",
     "http://www.youtube.com/*",
-    "http://www.free-tv-video-online.me/*"
+    "http://www.free-tv-video-online.me/*",
+    "http://dogear-uho.herokuapp.com/*"
   ],
   "content_scripts": [
     {
