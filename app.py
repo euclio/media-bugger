@@ -33,16 +33,20 @@ def mark_media_watched():
 def recent_shows():
     recent_shows = [{
                 'name': 'King of the Hill',
-                'summary': 'This is a cool show'
+                'summary': 'King of the Hill is an American adult animated sitcom created by Mike Judge and Greg Daniels that ran from January 12, 1997, to May 6, 2010, on Fox.',
+                'imageUrl': 'http://abortionsforall.files.wordpress.com/2011/08/hillposter.jpg' 
             },{
                 'name': 'The Big Bang Theory',
-                'summary': 'This show is silly'
+                'summary': 'The Big Bang Theory is an American sitcom created by Chuck Lorre and Bill Prady, both of whom serve as executive producers on the show along with Steven Molaro. All three also serve as head writers. It premiered on CBS on September 24, 2007.',
+                'imageUrl': 'http://vishalgoel38.files.wordpress.com/2013/05/tv-the-big-bang-theory34.jpg' 
             },{
-                'name': 'Test 1',
-                'summary': 'Test'
+                'name': 'Friends',
+                'summary': 'Friends is an American sitcom created by David Crane and Marta Kauffman, which aired on NBC from September 22, 1994 to May 6, 2004. The series revolves around a group of friends in the New York City borough of Manhattan.',
+                'imageUrl': 'http://bilmoore.com/wp-content/uploads/2012/01/friends-tv-show-wallpapers-1280x1024.jpg'
             },{
-                'name': 'Test 2',
-                'summary': 'Test 2'
+                'name': 'Game of Thrones',
+                'summary': 'Game of Thrones is an American fantasy drama television series created for HBO by David Benioff and D. B. Weiss.',
+                'imageUrl': 'http://fansided.com/wp-content/blogs.dir/229/files/2013/05/got8.jpg'
         }]
     #TODO swap-out
     #return recent_items(request.form['fb_id'])#, request.form['skip_index'])
