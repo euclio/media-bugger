@@ -3,12 +3,14 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		function(response) {
 		    if (response.method == "getTV") {
 		    	if (response.tvShow) {
-			   		document.getElementById('video-name').innerHTML = response.tvShow;     
+			   		$('#video-name').val(response.tvShow.tvName);
+			   		$('#season').val(response.tvShow.season);
+			   		$('#episode').val(response.tvShow.episode);
 			   	} else {
-			   		document.getElementById('video-name').innerHTML = 'Nothing';
+			   		$('#video-name').val('Nothing');
 			   	}
 			} else {
-				document.getElementById('video-name').innerHTML = 'Nothing';				 
+				$('#video-name').val(Nothing);
 			}
 		}
 	);
